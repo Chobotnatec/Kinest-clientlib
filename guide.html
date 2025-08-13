@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Kinest User Guide - Calibration and Tracking Tutorial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <header>
+    <div class="header-top">
+      <h1>Kinest</h1>
+      <p>Position Tracking for Educational Robots</p>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guide.html">Guide</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="shop.html">Shop</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2 style="color:#76B900; font-size:2.5rem;">User Guide</h2>
+    <section>
+      <p>
+
+        While we try to keep the application as intuitive as possible, object tracking in 3D space is complex
+        and requires some understanding of the system and steps to set it up correctly.
+        This guide will help you to understand the calibration and tracking process using Kinest.
+      </p>
+
+      <h2>A. Camera Calibration</h2>
+      <p>
+        To ensure accurate and robust tracking, each camera must be calibrated. Calibration estimates the camera's field
+        of view and lens distortion parameters. Calibration is a one-time process for each camera, resolution, and pixel
+        format combination. Once completed, the calibration data can be reused for future sessions.
+        Kinest contains an integrated calibration tool that simplifies this process.
+      </p>
+
+      <h3>1. Prepare the Calibration Pattern</h3>
+      <p>
+        To perform a calibration you will need a high-precision calibration pattern. Kinest uses Charuco (chessboard +
+        ArUco) boards as
+        calibration targets, with additional QR code which contains metadata about the board's layout and size.
+        There are several options how to obtain the calibration board:
+      </p>
+
+
+      <figure>
+        <div class="kinest-images-row">
+          <img src="assets/calibration_board.jpg" alt="Board example" width="300" height="200" />
+          <img src="assets/pattern_8.png" alt="Small board" width="200" height="200" />
+          <img src="assets/pattern_20.png" alt="Large board" width="200" height="200" />
+        </div>
+
+        <figcaption align="center">"Examples of different calibration Charuco boards with QR codes containing metadata"
+        </figcaption>
+      </figure>
+
+
+
+      <ul>
+        <li>Recommend option is to order high precision premade board from <a href="https://kinest.cz/shop.html"
+            target="_blank">shop</a>
+          (Which will also support further development of the application).</li>
+        <li>Make your own board by printing one of the patterns available in <a href="https://kinest.cz/resources.html"
+            target="_blank">resources</a> on rigid backing using a high-quality printer if you have access to one</li>
+        <li>Or possibly display the pattern on a flat high-resolution PC screen. Which might be easiest but provides
+          less accurate results.</li>
+      </ul>
+      <p>
+        The selection of the calibration pattern affects the accuracy of the calibration and depends on your needs.
+        Large patterns are generally easier to use due to the large number of features, but require more space and are
+        harder to transport.
+        Small patterns are more portable, but require more precise camera positioning and may result in less accurate
+        calibration. When you have the board ready, you can start the calibration tool and calibration process itself.
+      </p>
+      <h3>2. Select Camera and Format</h3>
+      <p>
+        From within the calibration application open Camera Settings and choose your desired camera, resolution.
+        Depending on selected resolution different detection ranges, precision and latency may be expected. With
+        higher resolutions provide better detection ranges but also higher latency. Currently recommend resolution is
+        1920x1080
+        which provides good balance between latency and detection range for most user cases.
+      </p>
+
+      <div class="note">
+        Recommended pixel formats are YUV or GREY due to ease of separating grayscale information. Avoid using JPEG
+        format due to decoding latency.
+      </div>
+
+      <p>
+        Once you select the camera and resolution, the video stream should be visible in the application.
+      </p>
+
+      <h3>3. Load Calibration Pattern Metadata</h3>
+      <p>
+        Kinest uses Charuco calibration targets. Point the camera at the QR code on the calibration board.
+        The application will automatically read and display the board's metadata in the top left corner of the screen.
+      </p>
+
+      <figure>
+        <img src="assets/qr_capture.jpg" alt="Calibration Pose Example Placeholder" class="placeholder">
+
+        <figcaption align="center">"Calibration tool with QR code in center of view and detected board metada in top
+          left corner"</figcaption>
+      </figure>
+
+
+      <h3>4. Capture Calibration Shots</h3>
+      <p>
+        Position the camera to capture the board from desired angle and press the <strong>"Capture"</strong> button. The
+        button will turn green.
+        The app captures the image automatically once the camera is steady enough and enough calibration corners are
+        identified.
+        The calibration tool will provide an audio cue and reset the capture button color to indicate a successful
+        capture. Steady camera position is indicated by the border of the camera view turning green.
+        If for some reason it is needed to change the limits on percentage of detected corners, or the maximum movement
+        speed, these settings can be adjusted in Clibration Settings menu, but it could have negative impact on
+        calibration quality.
+
+      <figure>
+        <img src="assets/stable_camera.jpg" alt="Calibration Pose Example Placeholder" class="placeholder">
+
+        <figcaption align="center">"Green border indicates stable camera position, ready for capture"</figcaption>
+
+      </figure>
+
+      </p>
+      <div class="note">
+        Try to fill the corners of the image with the calibration board. Closer shots are better than distant ones.
+      </div>
+
+
+      <p>
+        A typical calibration involves 6 shots:
+      <ul>
+        <li>2 from the front - which should cover the left and right sides of camera view, those help with distortion
+          correction</li>
+        <li>4 from angled positions - Covering the top, bottom, left, and right edges of the camera view. Helping with
+          establishing the overall perspective.</li>
+      </ul>
+
+      <figure>
+        <img src="assets/calibration_shots.png" alt="Calibration Pose Example">
+
+        <figcaption align="center">"Recommended placement of board in camera view for calibration shots, 2 straight
+          shots covering whole view and 4 angled shots to establishing perspective."</figcaption>
+      </figure>
+
+      </p>
+
+      <h3>5. Review and Save Calibration</h3>
+      <p>
+        Use the <strong>"Review Photos"</strong> menu to inspect captured images. The goal is to cover whole view with
+        calibration pattern, and have diverse set of shots. All shots should have approximatelly the same reprojection
+        error (distance between projected and observed points assuming ideal calibration target). If outlier appears it
+        can be deleted and redone. If satisfied, press the <strong>"Save"</strong> button to store the calibration.
+      </p>
+      <div class="note">
+        Calibration must be performed for each unique combination of camera, resolution, and pixel format, but only once
+        for each combination.
+      </div>
+    </section>
+
+    <section>
+      <h2>B. Marker Tracking</h2>
+      <p>
+        Once calibration is complete, you can begin real-time tracking. Open the tracking application and follow these
+        steps:
+      </p>
+
+      <h3>1. Select Camera and Resolution</h3>
+      <p>
+        Go to the <strong>"Camera"</strong> menu and select one of previously calibrated camera and resolutions. The
+        video
+        stream should now be visible.
+      </p>
+
+      <h3>2. Select Marker Dictionary and Size</h3>
+      <p>
+        In the <strong>"Tracking"</strong> menu:
+      </p>
+      <ul>
+        <li>Select the dictionary from which your markers are generated.</li>
+        <li>Choose the physical size of the markers.</li>
+      </ul>
+
+      <p>
+        Larger markers provide better detection range and accuracy, but require more space. The selected size must match
+        the
+        physical size of the used markers. Markers should be printed on rigid, flat surfaces. For optimal results, we
+        recommend ordering them from our store.
+      </p>
+
+      <h3>3. Choose Reference Frame</h3>
+      <p>
+        Define the method how to establish the reference frame for pose estimation:
+      </p>
+      <ul>
+        <li><strong>Camera:</strong> Positions of markers are relative to the camera.</li>
+        <li><strong>Static 0XY:</strong> Origin (ID 8), X direction (ID 9), Y marker (ID 10). Used when reference frame
+          is expected to be fixed (with only small or small changes)</li>
+        <li><strong>Dynamic 0XY:</strong> Same as above, but allows movement of camera relative to reference markers.
+        </li>
+        <li><strong>Single Marker:</strong> Reference frame defined by one marker (less precise).</li>
+      </ul>
+      <figure>
+        <img src="assets/axis.png" alt="Calibration Pose Example">
+
+        <figcaption align="center">"Reference frame setup by placing 0,X, and XY plane markers"</figcaption>
+      </figure>
+      <h3>4. Set Data Output</h3>
+      <p>
+        Finally you can set where poses of detected markers will be sent.
+        Kinest supports sending data over UDP, which is suitable for real-time applications. Open the
+        <strong>"Streaming"</strong> menu and
+        set the IP address and port for UDP data streaming. The default port is <code>63232</code>, but this can be
+        changed as needed.
+        System will start to immediately send position data in the Json format.
+      </p>
+
+      <div class="note">
+        Ensure that the receiving system is ready to handle incoming UDP packets on the specified port.
+      </div>
+    </section>
+
+
+    <h3>5. Output Format</h3>
+    <p>
+      The output format is a JSON object containing the marker ID and its position in the defined reference frame.
+      The position is represented as a 3D vector (x, y, z) in meters and the orientation as a quaternion (w, x, y, z).
+      Example:
+    </p>
+
+    <pre><code>
+{
+  "id": 1,
+  "position": {
+    "x": 0.5,
+    "y": 0.2,
+    "z": 1.0
+  },
+  "orientation": {
+    "w": 0.707,
+    "x": 0.0,
+    "y": 0.707,
+    "z": 0.0
+  }
+}
+      </code></pre>
+
+
+    </section>
+
+    <section>
+      <h2>Summary</h2>
+      <p>
+        If correctly setup Kinest offers an accurate and efficient way to track objects using visual markers, without
+        any additional hardware. It is designed for use in robotics clubs and industrial settings. To obtain ready-to-use markers, calibration boards, and other accessories visit our <a
+          href="https://kinest.cz/shop.html">Shop</a>.
+        
+        If you have any questions or need assistance, please join our discord server:
+      </p>
+
+      <a href="https://discord.gg/VaRsR8yv" target="_blank" rel="noopener">
+        <img src="https://discord.com/api/guilds/1404852693951975567/widget.png?style=banner2" alt="Join our Discord" />
+      </a>
+
+  
+    </section>
+
+  </main>
+
+</body>
+
+</html>
