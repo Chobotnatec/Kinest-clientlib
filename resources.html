@@ -3,9 +3,92 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kinest Resources - Coming Soon</title>
+    <title>Kinest Resources</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css" />
+    <style>
+        .section-title {
+            color: #76B900;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .pattern-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: left;
+            margin-bottom: 2rem;
+        }
+
+        .pattern-card {
+            background: #f8f8f8;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(26, 34, 51, 0.08);
+            padding: 1.5rem 2rem;
+            min-width: 280px;
+            max-width: 340px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        .pattern-card h4 {
+            color: #1a2233;
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-card p {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #76B900;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #5a8e00;
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #e0e0e0 60%, #76B900 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .directions {
+            background: #eafbe0;
+            border-left: 4px solid #76B900;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0 2rem 0;
+            border-radius: 8px;
+            color: #1a2233;
+        }
+
+        @media (max-width: 900px) {
+            .pattern-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -25,22 +108,115 @@
     </header>
     <main>
         <section style="text-align:center; margin-top:3rem;">
-            <h2 style="color:#76B900; font-size:2.5rem;">Resources</h2>
+            <h2 class="section-title">Resources</h2>
             <p style="font-size:1.3rem; color:#333;">
-                This page will soon offer downloadable <strong>TIFF</strong>, <strong>PNG</strong>, and
-                <strong>PDF</strong> versions of the ready to print ArUco markers and calibration boards for your
-                robotics and other tracking projects using Kinest. Also consider checking our <a href="shop.html">Shop</a> for high-quality printed markers and calibration boards and to support the development of application
+                Download ready-to-use ArUco marker calibration boards for on-screen and printable use. For professionally printed boards, visit our <a href="shop.html" style="color:#76B900;">Shop</a>.
             </p>
-            <div style="margin:2rem auto; display:flex; justify-content:center; align-items:center; gap:2rem;">
-                <img src="https://img.icons8.com/color/200/qr-code.png" alt="Marker Icon"
-                    style="filter: drop-shadow(0 0 10px #76B900);">
-                <img src="https://img.icons8.com/color/200/pdf.png" alt="PDF Icon"
-                    style="filter: drop-shadow(0 0 10px #1a2233);">
-                <img src="https://img.icons8.com/color/200/image.png" alt="Image Icon"
-                    style="filter: drop-shadow(0 0 10px #76B900);">
+        </section>
+
+        <!-- On-Screen Patterns Section -->
+        <section style="margin-top:3rem;">
+            <h3 class="section-title" style="font-size:2rem;">On-Screen Calibration Patterns</h3>
+            <div class="directions">
+                <strong>Directions:</strong>
+                <ul style="text-align:left; margin:0.5rem 0 0 1rem;">
+                    <li>1. Click on "Show" button to display full resolution pattern image for your screen resolution.</li>
+                    <li>2. For best accuracy, ensure the image is shown full screen on a screen matching the pattern's resolution.</li>
+                    <li>3. On larger screens, display the image at true dimensions (100% size, no scaling).</li>
+                </ul>
             </div>
-            <h3 style="color:#1a2233; margin-top:2rem;">Downloads Coming Soon!</h3>
-            <p style="color:#76B900; font-size:1.2rem;">Check back soon for printable and digital resources.</p>
+            <div id="pattern-slider" style="width:100vw;max-width:1800px;margin:0 auto 2rem auto;overflow-x:auto;overflow-y:hidden;box-sizing:border-box;">
+                <div class="pattern-group" style="flex-wrap:nowrap; gap:2rem; margin-bottom:0; min-width:900px;">
+                    <div class="pattern-card" style="flex:0 0 200px;">
+                        <img src="resources/display_patterns/pattern_1440px_8x8.png" alt="1440p 8x8 Preview" style="width:100%;border-radius:8px;margin-bottom:1rem;">
+                        <h4>1440p - 8x8 Grid</h4>
+                        <p><strong>Resolution:</strong> 1440px<br>
+                            <strong>Grid:</strong> 8x8<br>
+                            <strong>Marker Size:</strong> 120px<br>
+                            <strong>Square Size:</strong> 180px
+                        </p>
+                        <a class="download-btn" href="resources/display_patterns/pattern_1440px_8x8.png" download="pattern_1440px_8x8.png">Show</a>
+                    </div>
+                    <div class="pattern-card" style="flex:0 0 200px;">
+                        <img src="resources/display_patterns/pattern_1440px_10x10.png" alt="1440p 10x10 Preview" style="width:100%;border-radius:8px;margin-bottom:1rem;">
+                        <h4>1440p - 10x10 Grid</h4>
+                        <p><strong>Resolution:</strong> 1440px<br>
+                            <strong>Grid:</strong> 10x10<br>
+                            <strong>Marker Size:</strong> 96px<br>
+                            <strong>Square Size:</strong> 144px
+                        </p>
+                        <a class="download-btn" href="resources/display_patterns/pattern_1440px_10x10.png" download="pattern_1440px_10x10.png">Show</a>
+                    </div>
+                    <div class="pattern-card" style="flex:0 0 200px;">
+                        <img src="resources/display_patterns/pattern_2160px_10x10.png" alt="2160p 10x10 Preview" style="width:100%;border-radius:8px;margin-bottom:1rem;">
+                        <h4>2160p (4K) - 10x10 Grid</h4>
+                        <p><strong>Resolution:</strong> 2160px<br>
+                            <strong>Grid:</strong> 10x10<br>
+                            <strong>Marker Size:</strong> 144px<br>
+                            <strong>Square Size:</strong> 216px
+                        </p>
+                        <a class="download-btn" href="resources/display_patterns/pattern_2160px_10x10.png" download="pattern_2160px_10x10.png">Show</a>
+                    </div>
+                    <div class="pattern-card" style="flex:0 0 200px;">
+                        <img src="resources/display_patterns/pattern_2160px_12x12.png" alt="2160p 12x12 Preview" style="width:100%;border-radius:8px;margin-bottom:1rem;">
+                        <h4>2160p (4K) - 12x12 Grid</h4>
+                        <p><strong>Resolution:</strong> 2160px<br>
+                            <strong>Grid:</strong> 12x12<br>
+                            <strong>Marker Size:</strong> 120px<br>
+                            <strong>Square Size:</strong> 180px
+                        </p>
+                        <a class="download-btn" href="resources/display_patterns/pattern_2160px_12x12.png" download="pattern_2160px_12x12.png">Show</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Printable Patterns Section -->
+        <section style="margin-top:3rem;">
+            <h3 class="section-title" style="font-size:2rem;">Printable Calibration Patterns</h3>
+            <div class="directions">
+                <strong>Directions:</strong>
+                <ul style="text-align:left; margin:0.5rem 0 0 1rem;">
+                    <li>1. Download the pattern for your desired print size (use right-click and "Save link as..." in case it opens in browser).</li>
+                    <li>2. Print the pattern at 100% scale (no scaling, "actual size" or "no fit to page") to ensure correct dimensions.</li>
+                    <li>3. Use a high-quality printer, smooth surface and rigid backing for best results.</li>
+                </ul>
+            </div>
+            <div class="pattern-group" style="flex-wrap:nowrap; overflow-x:auto; gap:2rem; margin-bottom:0;">
+                <div class="pattern-card" style="flex:0 0 200px;">
+                    <img src="resources/print_patterns/print_400mm_8x8.png" alt="400mm 8x8 Print Preview" style="width:100%;border-radius:8px;margin-bottom:1rem;">
+                    <h4>400mm - 8x8 Grid</h4>
+                    <p><strong>Print Size:</strong> 400mm<br>
+                        <strong>Grid:</strong> 8x8<br>
+                        <strong>Marker Size:</strong> 29.97mm<br>
+                        <strong>Square Size:</strong> 44.96mm
+                    </p>
+                    <a class="download-btn" href="resources/print_patterns/print_400mm_8x8.png" download="print_400mm_8x8.png">Download</a>
+                </div>
+                <div class="pattern-card" style="flex:0 0 200px;">
+                    <img src="resources/print_patterns/print_600mm_12x12.png" alt="600mm 12x12 Print Preview" style="width:100%;border-radius:8px;margin-bottom:1rem;">
+                    <h4>600mm - 12x12 Grid</h4>
+                    <p><strong>Print Size:</strong> 600mm<br>
+                        <strong>Grid:</strong> 12x12<br>
+                        <strong>Marker Size:</strong> 31.07mm<br>
+                        <strong>Square Size:</strong> 46.65mm
+                    </p>
+                    <a class="download-btn" href="resources/print_patterns/print_600mm_12x12.png" download>Download</a>
+                </div>
+                <div class="pattern-card" style="flex:0 0 200px;">
+                    <img src="resources/print_patterns/print_800mm_16x16.png" alt="800mm 16x16 Print Preview" style="width:100%;border-radius:8px;margin-bottom:1rem;">
+                    <h4>800mm - 16x16 Grid</h4>
+                    <p><strong>Print Size:</strong> 800mm<br>
+                        <strong>Grid:</strong> 16x16<br>
+                        <strong>Marker Size:</strong> 31.67mm<br>
+                        <strong>Square Size:</strong> 47.49mm
+                    </p>
+                    <a class="download-btn" href="resources/print_patterns/print_800mm_16x16.png" download>Download</a>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align:center; margin-top:2rem;">
             <a href="https://discord.gg/VaRsR8yv" target="_blank" rel="noopener" style="display:inline-block;">
                 <img src="https://discord.com/api/guilds/1404852693951975567/widget.png?style=banner2"
                     alt="Join our Discord" />
